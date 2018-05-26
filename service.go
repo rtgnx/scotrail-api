@@ -36,38 +36,27 @@ func serviceDetails(service_id string) Service {
 func parseService(r io.Reader) (service Service) {
 	doc, _ := goquery.NewDocumentFromReader(r)
 
-	doc.Find("ul").Each(func(i int, s *goquery.Selection) {
-		stop := new(Stop)
-		createStop(s, stop)
-		service = append(service, *stop)
+	doc.Find("ul").ChildrenFiltered("li").Each(func(i int, s *goquery.Selection) {
+		service = append(service, createStop(s))
 	})
 
 	return
 }
 
-func createStop(s *goquery.Selection, stop *Stop) {
+func createStop(s *goquery.Selection) Stop {
 	text := strings.Split(s.Text(), "-")
-
-	if len(text) < 2 {
-		return
-	}
-
-	status := strings.Split(s.Text(), "at")
-
-	if len(text) < 2 {
-		return
-	}
+	status := strings.Split(text[1], "at")
 
 	t := ParseTime(status[1])
 
-	stop = &Stop{
-		Station: text[0], Status: status[0],
+	stop := Stop{
+		Station: strings.Trim(text[0], " \n"), Status: strings.Trim(status[0], " \n"),
 		Time: t, Connection: new(Service),
 	}
 
 	s.ChildrenFiltered("ul.connection").Each(func(i int, s *goquery.Selection) {
-		cstop := new(Stop)
-		createStop(s, cstop)
-		*stop.Connection = append(*stop.Connection, *cstop)
+		*stop.Connection = append(*stop.Connection, createStop(s))
 	})
+
+	return stop
 }
