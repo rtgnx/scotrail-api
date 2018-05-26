@@ -1,6 +1,7 @@
 package main
 
 import (
+	"strconv"
 	"strings"
 	"time"
 )
@@ -14,5 +15,7 @@ func ParseTime(t string) time.Time {
 		return now
 	}
 
-	return time.Date(now.Year(), now.Month(), now.Day(), 20, 34, 0, 0, time.UTC)
+	h, _ := strconv.ParseInt(t2[0], 10, 32)
+	m, _ := strconv.ParseInt(t2[1], 10, 32)
+	return time.Date(now.Year(), now.Month(), now.Day(), int(h), int(m), 0, 0, time.UTC)
 }
