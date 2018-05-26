@@ -58,8 +58,7 @@ func createStop(s *goquery.Selection, stop *Stop) {
 		return
 	}
 
-	t := time.Now()
-	t.Format(status[1])
+	t := ParseTime(status[1])
 
 	stop = &Stop{
 		Station: text[0], Status: status[0],

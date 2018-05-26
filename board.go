@@ -59,8 +59,7 @@ func ParseBoard(r io.Reader) (b Board) {
 			case "Platform":
 				e.Platform = platform(s.Text())
 			case "Arrives", "Departs":
-				t := time.Now()
-				t.Format(s.Text())
+				t := ParseTime(s.Text())
 				label := s.AttrOr("data-label", "")
 				reflect.ValueOf(&e).Elem().FieldByName(label).Set(reflect.ValueOf(t))
 			}
