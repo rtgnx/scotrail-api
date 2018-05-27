@@ -122,7 +122,7 @@ const TEST_BOARD = `
 
 func TestParseBoard(t *testing.T) {
 	board := ParseBoard(strings.NewReader(TEST_BOARD))
-	if len(board) < 1 {
+	if len(board.Services) < 1 {
 		t.Errorf("No data was extracted")
 	}
 }

@@ -12,7 +12,7 @@ func GetLiveBoard(ctx echo.Context) error {
 
 	b := getBoard(stn)
 
-	if len(b) < 1 {
+	if len(b.Services) < 1 {
 		return ctx.String(http.StatusNotAcceptable, "Invalid station name")
 	}
 

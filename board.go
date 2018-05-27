@@ -25,10 +25,13 @@ type Entry struct {
 	Operator    string    `json:"operator"`
 }
 
-type Board []Entry
+type Board struct {
+	Station  Station
+	Services []Entry
+}
 
 func (b *Board) HasStation(id string) (bool, int) {
-	for i, v := range *b {
+	for i, v := range b.Services {
 		if strings.Compare(v.ID, id) == 0 {
 			return true, i
 		}
@@ -49,7 +52,10 @@ func getBoard(station string) Board {
 
 	defer res.Body.Close()
 
-	return ParseBoard(res.Body)
+	b := ParseBoard(res.Body)
+	b.Station, _ = Stations[station]
+
+	return b
 }
 
 func ParseBoard(r io.Reader) (b Board) {
@@ -62,7 +68,7 @@ func ParseBoard(r io.Reader) (b Board) {
 
 		if ok {
 			if ok, idx := b.HasStation(id); ok {
-				e = &(b)[idx]
+				e = &(b.Services)[idx]
 			}
 		}
 
@@ -82,7 +88,7 @@ func ParseBoard(r io.Reader) (b Board) {
 
 		if len(e.ID) < 1 {
 			e.ID = id
-			b = append(b, *e)
+			b.Services = append(b.Services, *e)
 		}
 	})
 	return
