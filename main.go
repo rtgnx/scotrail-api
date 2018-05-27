@@ -31,6 +31,21 @@ func GetServiceDetails(ctx echo.Context) error {
 	return ctx.JSON(http.StatusOK, service)
 }
 
+func GetStation(ctx echo.Context) error {
+	name := ctx.Param("stn")
+
+	if v, ok := Stations[name]; ok {
+		return ctx.JSON(http.StatusOK, v)
+	}
+
+	return ctx.String(http.StatusNotFound, "No such station")
+}
+
+func GetSearchStations(ctx echo.Context) error {
+	name := ctx.Param("name")
+	return ctx.JSON(http.StatusOK, Stations.Search(name, 10))
+}
+
 func Hello(ctx echo.Context) error {
 	return ctx.String(http.StatusOK, "Hello, World")
 }
