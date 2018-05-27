@@ -28,31 +28,31 @@ Example response:
 
 ```JSON
 {
-  Station: {
-  name: "Glasgow Central",
-  postcode: "G1 3SA",
-  code: "GLC"
+  "Station": {
+  "name": "Glasgow Central",
+  "postcode": "G1 3SA",
+  "code": "GLC"
   },
-  Services: [
+  "Services": [
     {
-      id: "aQjBGRoe%2BIXqfw0PxLyCgg%3D%3D",
-      platform: 0,
-      destination: "Milngavie",
-      departs: "2018-05-27T12:04:00Z",
-      arrives: "2018-05-27T12:00:00Z",
-      expected: "Cancelled",
-      origin: "Rutherglen",
-      operator: "ScotRail"
+      "id": "aQjBGRoe%2BIXqfw0PxLyCgg%3D%3D",
+      "platform": 0,
+      "destination": "Milngavie",
+      "departs": "2018-05-27T12:04:00Z",
+      "arrives": "2018-05-27T12:00:00Z",
+      "expected": "Cancelled",
+      "origin": "Rutherglen",
+      "operator": "ScotRail"
     },
   	{
-      id: "hBBH%23C%2BZoU3l%23R68lwnWTA%3D%3D",
-      platform: 0,
-      destination: "Motherwell",
-      departs: "2018-05-27T12:08:00Z",
-      arrives: "0001-01-01T00:00:00Z",
-      expected: "On time",
-      origin: "Glasgow Central",
-      operator: "ScotRail"
+      "id": "hBBH%23C%2BZoU3l%23R68lwnWTA%3D%3D",
+      "platform": 0,
+      "destination": "Motherwell",
+      "departs": "2018-05-27T12:08:00Z",
+      "arrives": "0001-01-01T00:00:00Z",
+      "expected": "On time",
+      "origin": "Glasgow Central",
+      "operator": "ScotRail"
   	}
   ]
 }
@@ -75,16 +75,16 @@ Example response:
 ```JSON
 [
   {
-    Station: "East Kilbride",
-    Status: "Departed on time",
-    Connection: null,
-    Time: "2018-05-27T11:26:00Z"
+    "Station": "East Kilbride",
+    "Status": "Departed on time",
+    "Connection": null,
+    "Time": "2018-05-27T11:26:00Z"
   },
   {
-    Station: "Hairmyres",
-    Status: "Departed no report",
-    Connection: null,
-    Time: "2018-05-27T11:30:00Z"
+    "Station": "Hairmyres",
+    "Status": "Departed no report",
+    "Connection": null,
+    "Time": "2018-05-27T11:30:00Z"
   }
 	...
 ]
@@ -104,9 +104,9 @@ Example response:
 
 ```JSON
 {
-  name: "Glasgow Central",
-  postcode: "G1 3SA",
-  code: "GLC"
+  "name": "Glasgow Central",
+  "postcode": "G1 3SA",
+  "code": "GLC"
 }
 ```
 
@@ -125,39 +125,39 @@ Example response:
 ```JSON
 [
   {
-    name: "Queen's Park (Glasgow)",
-    postcode: "G42 8PH",
-    code: "QPK"
+    "name": "Queen's Park (Glasgow)",
+    "postcode": "G42 8PH",
+    "code": "QPK"
   },
   {
-    name: "Exhibition Centre (Glasgow)",
-    postcode: "G3 8LE",
-    code: "EXG"
+    "name": "Exhibition Centre (Glasgow)",
+    "postcode": "G3 8LE",
+    "code": "EXG"
   },
   {
-    name: "Port Glasgow",
-    postcode: "PA14 5JN",
-    code: "PTG"
+    "name": "Port Glasgow",
+    "postcode": "PA14 5JN",
+    "code": "PTG"
   },
   {
-    name: "Charing Cross (Glasgow)",
-    postcode: "G2 4PR",
-    code: "CHC"
+    "name": "Charing Cross (Glasgow)",
+    "postcode": "G2 4PR",
+    "code": "CHC"
   },
   {
-    name: "Glasgow Central",
-    postcode: "G1 3SA",
-    code: "GLC"
+    "name": "Glasgow Central",
+    "postcode": "G1 3SA",
+    "code": "GLC"
   },
   {
-    name: "High Street Glasgow",
-    postcode: "G1 1QF",
-    code: "HST"
+    "name": "High Street Glasgow",
+    "postcode": "G1 1QF",
+    "code": "HST"
   },
   {
-    name: "Glasgow Queen Street",
-    postcode: "G1 2AF",
-    code: "GLQ"
+    "name": "Glasgow Queen Street",
+    "postcode": "G1 2AF",
+    "code": "GLQ"
   }
 ]
 ```
