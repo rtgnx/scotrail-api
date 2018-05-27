@@ -8,9 +8,11 @@ import (
 )
 
 type Station struct {
-	Name     string `json:"name"`
-	Postcode string `json:"postcode"`
-	Code     string `json:"code"`
+	Name      string  `json:"name"`
+	Postcode  string  `json:"postcode"`
+	Code      string  `json:"code"`
+	Longitude float64 `json:"longitude"`
+	Latitude  float64 `json:"latitude"`
 }
 
 type StationList map[string]Station
@@ -49,5 +51,4 @@ func load_stations(path string) {
 	for _, s := range stations {
 		Stations[s.Code] = s
 	}
-
 }
