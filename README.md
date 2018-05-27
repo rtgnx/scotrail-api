@@ -1,5 +1,6 @@
 # Scotrail API
 
+[![Build Status](https://travis-ci.com/rtgnx/scotrail-api.svg?token=FDwqTidyvdfhSyx6QupG&branch=master)](https://travis-ci.com/rtgnx/scotrail-api)
 
 ## How to build ?
 
