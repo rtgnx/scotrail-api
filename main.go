@@ -63,6 +63,7 @@ func main() {
 	e.GET("/service/:id", GetServiceDetails)
 	e.GET("/station/:stn", GetStation)
 	e.GET("/search/:name", GetSearchStations)
+	e.Static("/static", "./static")
 
 	e.Start(addr)
 }
