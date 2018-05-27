@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Scotrail API</title>
+  </head>
+  <body>
+
+    <script charset="utf-8" src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
+    <script charset="utf-8">
+      $(document).ready(function () {
+        $.ajax({
+          url:
+          'https://raw.githubusercontent.com/rtgnx/scotrail-api/master/README.md',
+          type: 'GET',
+          success: function (data) {
+            $.ajax({
+              url: 'https://helloacm.com/api/markdown/',
+              type: 'POST',
+              data: { s: data },
+              success: function (data) {
+                $("body").html(data);
+              }
+            });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
