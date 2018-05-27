@@ -1,6 +1,7 @@
 package main
 
 import (
+	"io/ioutil"
 	"net/http"
 	"os"
 
@@ -47,7 +48,8 @@ func GetSearchStations(ctx echo.Context) error {
 }
 
 func Hello(ctx echo.Context) error {
-	return ctx.String(http.StatusOK, "Hello, World")
+	d, _ := ioutil.ReadFile("./index.html")
+	return ctx.HTMLBlob(http.StatusOK, d)
 }
 
 func main() {
