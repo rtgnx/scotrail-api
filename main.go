@@ -54,9 +54,13 @@ func main() {
 	addr := ":" + os.Getenv("PORT")
 	e := echo.New()
 
+	load_stations("./stations.json")
+
 	e.GET("/", Hello)
 	e.GET("/live/:stn", GetLiveBoard)
 	e.GET("/service/:id", GetServiceDetails)
+	e.GET("/station/:stn", GetStation)
+	e.GET("/search/:name", GetSearchStations)
 
 	e.Start(addr)
 }
