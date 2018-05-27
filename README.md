@@ -44,7 +44,7 @@ Example response:
       "origin": "Rutherglen",
       "operator": "ScotRail"
     },
-  	{
+    {
       "id": "hBBH%23C%2BZoU3l%23R68lwnWTA%3D%3D",
       "platform": 0,
       "destination": "Motherwell",
@@ -53,7 +53,7 @@ Example response:
       "expected": "On time",
       "origin": "Glasgow Central",
       "operator": "ScotRail"
-  	}
+    }
   ]
 }
 ```
