@@ -47,6 +47,10 @@ func GetSearchStations(ctx echo.Context) error {
 	return ctx.JSON(http.StatusOK, Stations.Search(name, 10))
 }
 
+func GetStatus(ctx echo.Context) error {
+	return ctx.JSON(http.StatusOK, GetRouteStatuses())
+}
+
 func Hello(ctx echo.Context) error {
 	d, _ := ioutil.ReadFile("./index.html")
 	return ctx.HTMLBlob(http.StatusOK, d)
@@ -59,11 +63,12 @@ func main() {
 	load_stations("./stations.json")
 
 	e.GET("/", Hello)
+	e.GET("/status", GetStatus)
 	e.GET("/live/:stn", GetLiveBoard)
 	e.GET("/service/:id", GetServiceDetails)
 	e.GET("/station/:stn", GetStation)
 	e.GET("/search/:name", GetSearchStations)
 	e.Static("/static", "./static")
 
-	e.Start(addr)
+	e.Logger.Debug(e.Start(addr))
 }
