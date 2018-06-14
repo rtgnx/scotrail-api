@@ -8,6 +8,7 @@ import (
 	"strings"
 
 	"github.com/PuerkitoBio/goquery"
+	"github.com/bradfitz/slice"
 	"github.com/tidwall/gjson"
 )
 
@@ -39,6 +40,11 @@ func GetRouteStatuses() (routes []Route) {
 	defer r.Body.Close()
 
 	routes = parseRoutes(r.Body)
+
+	slice.Sort(routes[:], func(i, j int) bool {
+		return routes[i].RouteID < routes[j].RouteID
+	})
+
 	return
 }
 
