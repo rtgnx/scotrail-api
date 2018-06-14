@@ -1,0 +1,212 @@
+{
+	"route-1-strathclyde_s-glasgow_cathcart_neilston_newton": {
+    "route_id": 1,
+    "region": "Strathclyde outh",
+	  "stations": [
+	    "Glasgow", "Cathcart", "Neilston", "Newton"
+    ]
+  },
+	"route-2-strathclyde_s-glasgow_kilbride_barrhead_kilmarnock": {
+	  "route_id": 2,
+	  "region": "Strathclyde south",
+	  "stations": [
+	    "Glasgow", "East Kilbride", "Barrhead", "Kilmarnock"
+    ]
+  },
+	"route-3-strathclyde_s-glasgow_paisley": {
+	  "route_id": 3,
+	  "region": "Strathclyde south",
+	  "stations": [
+	    "Glasgow", "Paisley"
+    ]
+  },
+	"route-4-strathclyde_n-glasgow_milngavie_dalmuir_balloch_helensburgh": {
+	  "route_id": 4,
+	  "region": "Strathclyde north",
+	  "stations": [
+	    "Glasgow", "Milngavie", "Dalmuir", "Balloch", "Helensburgh"
+    ]
+  },
+	"route-5-strathclyde_n-glasgow_whifflet_motherwell_milngavie": {
+	  "route_id": 5,
+	  "region": "North Strathclyde",
+	  "stations": [
+	    "Glasgow", "Whifflet", "Motherwell", "Milngavie"
+    ]
+  },
+	"route-6-strathclyde_n-larkhall_glasgow": {
+	  "route_id": 6,
+	  "region": "Norht Strathclyde",
+	  "stations": [
+	    "Glasgow", "Larkhall"
+    ]
+  },
+	"route-7-strathclyde_n-helensburgh_milngavie_edinburgh_bathgate": {
+	  "route_id": 7,
+	  "region": "North Strathclyde",
+	  "stations": [
+	    "Helensburgh", "Milngavie", "Edinburgh", "Bathgate"
+    ]
+  },
+	"route-8-central-edinburgh_glasgow_falkirk": {
+	  "route_id": 8,
+	  "region": "Central",
+	  "stations": [
+	    "Edinburgh", "Glasgow", "Falkirk"
+    ]
+  },
+	"route-9-central-glasgow_edinburgh_dunblane_stirling_alloa": {
+	  "route_id": 9,
+	  "region": "Central",
+	  "stations": [
+	    "Glasgow", "Edinburgh", "Dunblane", "Stirling", "Alloa"
+    ]
+  },
+	"route-10-central-glasgow_shotts": {
+	  "route_id": 10,
+	  "region": "Central",
+	  "stations": [
+	    "Glasgow", "Shotts"
+    ]
+  },
+	"route-11-central-glasgow_lanark": {
+	  "route_id": 11,
+	  "region": "Central",
+	  "stations": [
+	    "Glasgow", "Lanark"
+    ]
+  },
+	"route-12-central-glasgow_falkirk_cumbernauld": {
+	  "route_id": 12,
+	  "region": "Central",
+	  "stations": [
+	    "Glasgow", "Falkirk", "Cumbernauld"
+    ]
+	},
+	"route-13-central-motherwell_cumbernauld": {
+	  "route_id": 13,
+	  "region": "Central",
+	  "stations": [
+	    "Motherwell", "Cumbernauld"
+    ]
+  },
+	"route-14-central-glasgow_anniesland": {
+	  "route_id": 14,
+	  "region": "Central",
+	  "stations": [
+	    "Glasgow", "Anniesland"
+    ]
+  },
+	"route-15-express-glasgow_aberdeen": {
+	  "route_id": 15,
+	  "region": "Express",
+	  "stations": [
+	    "Glasgow", "Aberdeen"
+    ]
+  },
+	"route-16-express-edinburgh_aberdeen": {
+	  "route_id": 16,
+	  "region": "Express",
+	  "stations": [
+	    "Edinburh", "Aberdeen"
+    ]
+  },
+	"route-17-express-glasgow_edinburgh_inverness": {
+	  "route_id": 17,
+	  "region": "Express",
+	  "stations": [
+	    "Glasgow", "Edinburgh", "Inverness"
+    ]
+  },
+	"route-18-highland-aberdeen_inverness": {
+	  "route_id": 18,
+	  "region": "Highland",
+	  "stations": [
+	    "Aberdeen", "Inverness"
+    ]
+  },
+	"route-19-highland-glasgow_oban_fort_william_mallaig": {
+	  "route_id": 19,
+	  "region": "Highland",
+	  "stations": [
+	    "Glasgow", "Oban", "Fort William", "Mallaig"
+    ]
+  },
+	"route-20-highland-inverness_kyle": {
+	  "route_id": 20,
+	  "region": "Highland",
+	  "stations": [
+	    "Inverness", "Kyle"
+    ]
+  },
+	"route-21-highland-inverness_wick_thurso": {
+	  "route_id": 21,
+	  "region": "Highland",
+	  "stations": [
+	    "Inverness", "Wick", "Thurso"
+    ]
+  },
+	"route-22-east_scotland-tweedbank_newcraighall_edinburgh": {
+	  "route_id": 22,
+	  "region": "East Scotland",
+	  "stations": [
+	    "Tweedbank", "Newcraighall", "Edinburgh"
+    ]
+  },
+	"route-23-east_scotland-fife_rosyth_dalgetty": {
+	  "route_id": 23,
+	  "region": "East Scotland",
+	  "stations": [
+	    "Fife", "Rosyth", "Delgetty"
+    ]
+  },
+	"route-24-east_scotland-edinburgh_north_berwick_dunbar": {
+	  "route_id": 24,
+	  "region": "East Scotland",
+	  "stations": [
+	    "Edinburgh", "North Berwick", "Dunbar"
+    ]
+  },
+	"route-25-east_scotland-edinburgh_perth": {
+	  "route_id": 25,
+	  "region": "East Scotland",
+	  "stations": [
+	    "Edinburgh", "Perth"
+    ]
+  },
+	"route-26-ayrshire-glasgow_ardrossan_ayr_largs": {
+	  "route_id": 26,
+	  "region": "Ayrshire",
+	  "stations": [
+	    "Glasgow", "Ardrossan", "Ayr", "Largs"
+    ]
+  },
+	"route-27-ayrshire-glasgow_gourock_wemyss": {
+	  "route_id": 27,
+	  "region": "Ayrshire",
+	  "stations": [
+	    "Glasgow", "Gourock", "Wemyss"
+    ]
+  },
+	"route-28-ayrshire-kilmarnock_ayr": {
+	  "route_id": 27,
+	  "region": "Ayrshire",
+	  "stations": [
+	    "Glasgow", "Kilmarnock", "Ayr"
+    ]
+  },
+	"route-29-south_west-glasgow_stranraer_ayr_paisley": {
+	  "route_id": 29,
+	  "region": "South west",
+	  "stations": [
+	    "Glasgow", "Stranraer", "Ayr", "Paisley"
+    ]
+  },
+	"route-31-south_west-glasgow_carlisle_newcastle": {
+	  "route_id": 31,
+	  "region": "South west",
+	  "stations": [
+	    "Glasgow", "Carlisle", "Newscastle"
+    ]
+  }
+}

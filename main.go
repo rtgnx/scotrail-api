@@ -61,6 +61,7 @@ func main() {
 	e := echo.New()
 
 	load_stations("./stations.json")
+	load_routes("./routes.json")
 
 	e.GET("/", Hello)
 	e.GET("/status", GetStatus)

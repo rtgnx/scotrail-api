@@ -1,13 +1,10 @@
 package main
 
 import (
-	"encoding/json"
 	"io"
 	"io/ioutil"
 	"log"
 	"net/http"
-	"regexp"
-	"strconv"
 	"strings"
 
 	"github.com/PuerkitoBio/goquery"
@@ -50,46 +47,24 @@ func parseRoutes(r io.Reader) (routes []Route) {
 	b, _ := ioutil.ReadAll(r)
 	data := gjson.Get(string(b), "routes").Map()
 
-	json.Unmarshal(b, data)
-
 	for k, v := range data {
-		r := new(Route)
-		parseRouteString(k, r)
 
-		r.Map, r.Status = v.Get("map").String(), v.Get("status").String()
-		log.Printf("%v", r)
+		r, ok := Routes[k]
 
-		if v.Get("html").Exists() {
-			parseRouteDetails(v.Get("html").String(), r)
+		if !ok {
+			log.Fatalf("Route: %s was not found in routes.json", k)
 		}
 
-		routes = append(routes, *r)
+		r.Map, r.Status = v.Get("map").String(), v.Get("status").String()
+
+		if v.Get("html").Exists() {
+			parseRouteDetails(v.Get("html").String(), &r)
+		}
+
+		routes = append(routes, r)
 	}
 
 	return
-}
-
-func parseRouteString(s string, r *Route) {
-	re, _ := regexp.Compile(`route-([0-99]{1,2})-([a-zA-Z_]{1,})-([a-zA-Z_]{1,})`)
-
-	res := re.FindAllStringSubmatch(s, -1)
-
-	if len(res) != 1 || len(res[0]) != 4 {
-		log.Fatalln("ERROR: Unable to parse route string")
-	}
-
-	id, _ := strconv.ParseInt(res[0][1], 10, 32)
-	r.RouteID = int(id)
-	r.Region = res[0][2]
-
-	var stations = res[0][3]
-
-	// Remove directions suffix
-	for _, n := range []string{"_north", "_east", "_south", "_west"} {
-		stations = strings.Replace(stations, n, "", -1)
-	}
-
-	r.Stations = strings.Split(stations, "_")
 }
 
 func parseRouteDetails(html string, r *Route) {
