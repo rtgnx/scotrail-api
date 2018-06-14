@@ -1,28 +1,28 @@
 {
 	"route-1-strathclyde_s-glasgow_cathcart_neilston_newton": {
     "route_id": 1,
-    "region": "Strathclyde outh",
+    "region": "South Strathclyde",
 	  "stations": [
 	    "Glasgow", "Cathcart", "Neilston", "Newton"
     ]
   },
 	"route-2-strathclyde_s-glasgow_kilbride_barrhead_kilmarnock": {
 	  "route_id": 2,
-	  "region": "Strathclyde south",
+	  "region": "South Strathclyde",
 	  "stations": [
 	    "Glasgow", "East Kilbride", "Barrhead", "Kilmarnock"
     ]
   },
 	"route-3-strathclyde_s-glasgow_paisley": {
 	  "route_id": 3,
-	  "region": "Strathclyde south",
+	  "region": "South Strathclyde",
 	  "stations": [
 	    "Glasgow", "Paisley"
     ]
   },
 	"route-4-strathclyde_n-glasgow_milngavie_dalmuir_balloch_helensburgh": {
 	  "route_id": 4,
-	  "region": "Strathclyde north",
+	  "region": "North Strathclyde",
 	  "stations": [
 	    "Glasgow", "Milngavie", "Dalmuir", "Balloch", "Helensburgh"
     ]
