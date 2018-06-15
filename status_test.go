@@ -12,16 +12,8 @@ func TestParseRouteDetails(t *testing.T) {
 
 	parseRouteDetails(html_issue, r)
 
-	if len(r.Issue.Reason) < 1 {
+	if len(r.Issue.Severity) < 1 {
 		t.Errorf("No reason")
-	}
-
-	if len(r.Issue.AffectedServices) < 1 {
-		t.Errorf("No affected services")
-	}
-
-	if len(r.Issue.Details) < 1 {
-		t.Errorf("No details")
 	}
 
 }

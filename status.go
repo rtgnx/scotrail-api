@@ -5,7 +5,9 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"regexp"
 	"strings"
+	"time"
 
 	"github.com/PuerkitoBio/goquery"
 	"github.com/bradfitz/slice"
@@ -14,10 +16,18 @@ import (
 
 const ROUTE_STATUS_URL = `https://www.scotrail.co.uk/ajax/interactive_map/status`
 
+type ServiceStatus struct {
+	ID          string
+	Time        time.Time
+	Due         time.Time
+	Origin      string
+	Destination string
+	Status      string
+}
+
 type Issue struct {
-	Reason           string   `json:"reason"`
-	Details          []string `json:"details"`
-	AffectedServices []string `json:"affected_services"`
+	Severity string          `json:"severity"`
+	Details  []ServiceStatus `json:"details"`
 }
 
 type Route struct {
@@ -27,7 +37,7 @@ type Route struct {
 	Map      string   `json:"map"`
 	Status   string   `json:"status"`
 	Stations []string `json:"stations"`
-	Issue    Issue
+	Issue    Issue    `json:"issue"`
 }
 
 func GetRouteStatuses() (routes []Route) {
@@ -78,15 +88,33 @@ func parseRouteDetails(html string, r *Route) {
 	doc, _ := goquery.NewDocumentFromReader(strings.NewReader(html))
 	issue := new(Issue)
 
-	doc.Find("span.issues").Each(func(i int, s *goquery.Selection) {
-		issue.Reason = s.Text()
-	})
+	re, err := regexp.Compile(`^([0-9]{2}):([0-9]{2})\s([a-zA-Z\s]{1,})\sto\s([a-zA-Z\s]{1,})\sdue\s([0-9]{2}):([0-9]{2})\s(will be|has been|was)\s(cancelled|reinstated|started)`)
 
-	doc.Find("ul.services").Children().Each(func(i int, s *goquery.Selection) {
-		id := s.Children().First().AttrOr("href", "#")
-		issue.AffectedServices = append(issue.AffectedServices, id[1:])
-		s.Find("div" + id).Children().Each(func(i int, s *goquery.Selection) {
-			issue.Details = append(issue.Details, s.Text())
+	if err != nil {
+		log.Fatalln(err.Error())
+	}
+
+	doc.Find("span.issues").Each(func(i int, s *goquery.Selection) {
+		issue.Severity = s.Text()
+
+		doc.Find("ul.services").Children().Each(func(i int, s *goquery.Selection) {
+			id := s.Children().First().AttrOr("href", "#")
+
+			s.Find("div" + id).Children().Each(func(i int, s *goquery.Selection) {
+				matches := re.FindAllStringSubmatch(s.Text(), -1)
+
+				if len(matches) == 0 {
+					return
+				}
+
+				ss := ServiceStatus{
+					ID: id[1:], Origin: matches[0][3], Destination: matches[0][4],
+					Status: matches[0][7] + " " + matches[0][8],
+				}
+
+				issue.Details = append(issue.Details, ss)
+
+			})
 		})
 	})
 
