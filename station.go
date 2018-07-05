@@ -1,16 +1,25 @@
 package main
 
 import (
-	"encoding/json"
 	"io/ioutil"
-	"log"
 	"math"
+	"net/http"
 	"regexp"
+
+	"github.com/tidwall/gjson"
 )
+
+const (
+	STATION_LIST_URL = `https://www.scotrail.co.uk/cache/trainline_stations/trainline?_=1530115581789`
+)
+
+type Cordinate struct {
+	lon float64 `json:"longitude"`
+	lat float64 `json:"latitude"`
+}
 
 type Station struct {
 	Name      string  `json:"name"`
-	Postcode  string  `json:"postcode"`
 	Code      string  `json:"code"`
 	Longitude float64 `json:"longitude"`
 	Latitude  float64 `json:"latitude"`
