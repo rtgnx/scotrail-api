@@ -4,6 +4,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"os"
+	"strconv"
 
 	"github.com/labstack/echo"
 )
@@ -51,15 +52,12 @@ func GetStatus(ctx echo.Context) error {
 	return ctx.JSON(http.StatusOK, GetRouteStatuses())
 }
 
-func PostNearest(ctx echo.Context) error {
+func GetNearest(ctx echo.Context) error {
 
-	pt := new(Cordinate)
+	lat, _ := strconv.ParseFloat(ctx.Param("lat"), 64)
+	lon, _ := strconv.ParseFloat(ctx.Param("lon"), 64)
 
-	if err := ctx.Bind(pt); err != nil {
-		return ctx.String(http.StatusOK, err.Error())
-	}
-
-	dist, st := Stations.Nearest(*pt)
+	dist, st := Stations.Nearest(Coordinate{lat: lat, lon: lon})
 	return ctx.JSON(
 		http.StatusOK, map[string]interface{}{"station": st, "distance": dist},
 	)
@@ -83,7 +81,7 @@ func main() {
 	e.GET("/service/:id", GetServiceDetails)
 	e.GET("/station/:stn", GetStation)
 	e.GET("/search/:name", GetSearchStations)
-	e.POST("/nearest", PostNearest)
+	e.GET("/nearest/:lat/:lon", GetNearest)
 	e.Static("/static", "./static")
 
 	e.Logger.Debug(e.Start(addr))

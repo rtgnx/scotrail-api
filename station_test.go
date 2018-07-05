@@ -24,7 +24,7 @@ func TestSearch(t *testing.T) {
 func TestNearest(t *testing.T) {
 	load_stations()
 
-	var c = Cordinate{lat: 55.859618, lon: -4.257926}
+	var c = Coordinate{lat: 55.859618, lon: -4.257926}
 	d, st := Stations.Nearest(c)
 
 	if strings.Compare(st.Code, "GLC") != 0 {

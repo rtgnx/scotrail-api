@@ -13,7 +13,7 @@ const (
 	STATION_LIST_URL = `https://www.scotrail.co.uk/cache/trainline_stations/trainline?_=1530115581789`
 )
 
-type Cordinate struct {
+type Coordinate struct {
 	lon float64 `json:"longitude"`
 	lat float64 `json:"latitude"`
 }
@@ -29,13 +29,13 @@ type StationList map[string]Station
 
 var Stations StationList = make(map[string]Station)
 
-func (s *StationList) Nearest(location Cordinate) (dist int, stn Station) {
+func (s *StationList) Nearest(location Coordinate) (dist int, stn Station) {
 	for _, st := range *s {
 		if st.Latitude == 0.0 || st.Longitude == 0.0 {
 			continue
 		}
 
-		d := distance(Cordinate{lon: st.Longitude, lat: st.Latitude}, location)
+		d := distance(Coordinate{lon: st.Longitude, lat: st.Latitude}, location)
 
 		if dist == 0 || dist > d {
 			dist = d
@@ -83,7 +83,7 @@ func deg2rad(x float64) float64 {
 }
 
 // Returns distance between two cordinates
-func distance(a, b Cordinate) int {
+func distance(a, b Coordinate) int {
 	var R = 6371e3 // metres
 	var φ1 = deg2rad(a.lat)
 	var φ2 = deg2rad(b.lat)
