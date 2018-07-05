@@ -26,8 +26,8 @@ type Entry struct {
 }
 
 type Board struct {
-	Station  Station
-	Services []Entry
+	Station  Station `json:"station"`
+	Services []Entry `json:"services"`
 }
 
 func (b *Board) HasStation(id string) (bool, int) {

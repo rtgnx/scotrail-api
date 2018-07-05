@@ -17,12 +17,12 @@ import (
 const ROUTE_STATUS_URL = `https://www.scotrail.co.uk/ajax/interactive_map/status`
 
 type ServiceStatus struct {
-	ID          string
-	Time        time.Time
-	Due         time.Time
-	Origin      string
-	Destination string
-	Status      string
+	ID          string    `json:"id"`
+	Time        time.Time `json:"time"`
+	Due         time.Time `json:"due"`
+	Origin      string    `json:"origin"`
+	Destination string    `json:"destination"`
+	Status      string    `json:"status"`
 }
 
 type Issue struct {
