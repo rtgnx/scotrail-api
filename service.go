@@ -5,7 +5,6 @@ import (
 	"log"
 	"net/http"
 	"strings"
-	"time"
 
 	"github.com/PuerkitoBio/goquery"
 )
@@ -16,7 +15,7 @@ type Stop struct {
 	Station    string
 	Status     string
 	Connection *Service
-	Time       time.Time
+	Time       string
 }
 
 type Service []Stop
@@ -47,7 +46,7 @@ func createStop(s *goquery.Selection) Stop {
 	text := strings.Split(s.Text(), "-")
 	status := strings.Split(text[1], "at")
 
-	t := ParseTime(status[1])
+	t := status[1]
 
 	stop := Stop{
 		Station: strings.Trim(text[0], " \n"), Status: strings.Trim(status[0], " \n"),
