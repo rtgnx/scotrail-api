@@ -7,10 +7,10 @@
 Simplest way to build this service is to use provided `Makfile` which will build
 docker image and run it.
 
-```$: go test```  - Run tests  
-```$: make build``` - Build Docker image  
-```$: make run``` - Build docker image and start container  
-```$: make update``` - Build new image and restart docker container  
+`$: go test`     - Run tests
+`$: make build`  - Build Docker image
+`$: make run`    - Build docker image and start container
+`$: make update` - Build new image and restart docker container
 
 
 ## API Documentation
