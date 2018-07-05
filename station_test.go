@@ -1,9 +1,12 @@
 package main
 
-import "testing"
+import (
+	"strings"
+	"testing"
+)
 
 func TestSearch(t *testing.T) {
-	load_stations("./stations.json")
+	load_stations()
 
 	results := Stations.Search("Dalmuir", 10)
 
@@ -15,5 +18,16 @@ func TestSearch(t *testing.T) {
 
 	if len(results) > 2 {
 		t.Error("Expected only 2 results")
+	}
+}
+
+func TestNearest(t *testing.T) {
+	load_stations()
+
+	var c = Cordinate{lat: 55.859618, lon: -4.257926}
+	d, st := Stations.Nearest(c)
+
+	if strings.Compare(st.Code, "GLC") != 0 {
+		t.Errorf("Nearest station is %s within %d meters", st.Name, d)
 	}
 }

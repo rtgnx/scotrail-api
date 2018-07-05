@@ -51,6 +51,20 @@ func GetStatus(ctx echo.Context) error {
 	return ctx.JSON(http.StatusOK, GetRouteStatuses())
 }
 
+func PostNearest(ctx echo.Context) error {
+
+	pt := new(Cordinate)
+
+	if err := ctx.Bind(pt); err != nil {
+		return ctx.String(http.StatusOK, err.Error())
+	}
+
+	dist, st := Stations.Nearest(*pt)
+	return ctx.JSON(
+		http.StatusOK, map[string]interface{}{"station": st, "distance": dist},
+	)
+}
+
 func Hello(ctx echo.Context) error {
 	d, _ := ioutil.ReadFile("./index.html")
 	return ctx.HTMLBlob(http.StatusOK, d)
@@ -60,7 +74,7 @@ func main() {
 	addr := ":" + os.Getenv("PORT")
 	e := echo.New()
 
-	load_stations("./stations.json")
+	load_stations()
 	load_routes("./routes.json")
 
 	e.GET("/", Hello)
@@ -69,6 +83,7 @@ func main() {
 	e.GET("/service/:id", GetServiceDetails)
 	e.GET("/station/:stn", GetStation)
 	e.GET("/search/:name", GetSearchStations)
+	e.POST("/nearest", PostNearest)
 	e.Static("/static", "./static")
 
 	e.Logger.Debug(e.Start(addr))
