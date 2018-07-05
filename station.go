@@ -1,10 +1,12 @@
 package main
 
 import (
+	"fmt"
 	"io/ioutil"
 	"math"
 	"net/http"
 	"regexp"
+	"strings"
 
 	"github.com/tidwall/gjson"
 )
@@ -47,8 +49,11 @@ func (s *StationList) Nearest(location Coordinate) (dist int, stn Station) {
 }
 
 func (s *StationList) Search(name string, limit int) (l []Station) {
+	name = strings.ToLower(name)
+	r := fmt.Sprintf(".*%s.*", name)
+
 	for _, v := range *s {
-		if ok, _ := regexp.MatchString(".*"+name+".*", v.Name); ok {
+		if ok, _ := regexp.MatchString(r, strings.ToLower(v.Name)); ok {
 			l = append(l, v)
 		}
 
