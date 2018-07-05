@@ -97,7 +97,7 @@ Endpoint: `GET https://scotrail.pw/station/:station_code:`
 
 Example request:
 ```
-$: curl -X GET https://scotrail.pw/station/GLC
+$: curl -X GET https://scotrail.pw/station/EXG
 
 ```
 
@@ -105,9 +105,10 @@ Example response:
 
 ```JSON
 {
-  "name": "Glasgow Central",
-  "postcode": "G1 3SA",
-  "code": "GLC"
+  "code": "EXG",
+  "latitude": 55.860619,
+  "longitude": -4.283207,
+  "name": "Exhibition Centre (Glasgow)"
 }
 ```
 
@@ -126,39 +127,114 @@ Example response:
 ```JSON
 [
   {
-    "name": "Queen's Park (Glasgow)",
-    "postcode": "G42 8PH",
-    "code": "QPK"
+    "code": "EXG",
+    "latitude": 55.860619,
+    "longitude": -4.283207,
+    "name": "Exhibition Centre (Glasgow)"
   },
   {
-    "name": "Exhibition Centre (Glasgow)",
-    "postcode": "G3 8LE",
-    "code": "EXG"
+    "code": "QPK",
+    "latitude": 55.835747,
+    "longitude": -4.267368,
+    "name": "Queens Park (Glasgow)"
   },
   {
-    "name": "Port Glasgow",
-    "postcode": "PA14 5JN",
-    "code": "PTG"
+    "code": "GGT",
+    "latitude": 55.865803,
+    "longitude": -4.432114,
+    "name": "Glasgow Airport"
   },
   {
-    "name": "Charing Cross (Glasgow)",
-    "postcode": "G2 4PR",
-    "code": "CHC"
+    "code": "PTG",
+    "latitude": 55.9342,
+    "longitude": -4.689432,
+    "name": "Port Glasgow"
   },
   {
-    "name": "Glasgow Central",
-    "postcode": "G1 3SA",
-    "code": "GLC"
+    "code": "CHC",
+    "latitude": 55.865345,
+    "longitude": -4.270689,
+    "name": "Charing Cross (Glasgow)"
   },
   {
-    "name": "High Street Glasgow",
-    "postcode": "G1 1QF",
-    "code": "HST"
+    "code": "HST",
+    "latitude": 55.858719,
+    "longitude": -4.239953,
+    "name": "High Street (Glasgow)"
   },
   {
-    "name": "Glasgow Queen Street",
-    "postcode": "G1 2AF",
-    "code": "GLQ"
+    "code": "GLC",
+    "latitude": 55.860157,
+    "longitude": -4.259208,
+    "name": "Glasgow Central"
+  },
+  {
+    "code": "GLQ",
+    "latitude": 55.863003,
+    "longitude": -4.251385,
+    "name": "Glasgow Queen Street"
+  },
+  {
+    "code": "81",
+    "latitude": 0,
+    "longitude": 0,
+    "name": "Glasgow (Any)"
   }
+]
+```
+
+### Nearest station
+
+Endpoint: `GET https://scotrail.pw/nearest/:lat:/:lon:`
+
+Example request:
+```
+$: curl -X GET https://scotrail.pw/nearest/55.860150/-4.259308
+
+```
+
+Example response:
+
+```JSON
+
+{
+    "distance": 6, // Meters
+    "station": {
+        "code": "GLC",
+        "latitude": 55.860157,
+        "longitude": -4.259208,
+        "name": "Glasgow Central"
+    }
+}
+```
+
+### All stations
+
+Endpoint: `GET https://scotrail.pw/stations`
+
+Example request:
+```
+$: curl -X GET https://scotrail.pw/stations
+
+```
+
+Example response:
+
+```JSON
+[
+  {
+    "code": "EXG",
+    "latitude": 55.860619,
+    "longitude": -4.283207,
+    "name": "Exhibition Centre (Glasgow)"
+  },
+  {
+    "code": "QPK",
+    "latitude": 55.835747,
+    "longitude": -4.267368,
+    "name": "Queens Park (Glasgow)"
+  },
+
+  ...
 ]
 ```
