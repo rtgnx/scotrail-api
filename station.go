@@ -87,14 +87,16 @@ func distance(a, b Cordinate) int {
 	var R = 6371e3 // metres
 	var φ1 = deg2rad(a.lat)
 	var φ2 = deg2rad(b.lat)
-	var Δφ = deg2rad(b.lat - a.lat)
-	var Δλ = deg2rad(b.long - a.long)
 
-	var an = math.Sin(Δφ/2)*math.Sin(Δφ/2) + math.Cos(φ1)*math.Cos(φ2)*math.Sin(Δλ/2)*math.Sin(Δλ/2)
+	var Δφ = deg2rad(b.lat - a.lat)
+	var Δλ = deg2rad(b.lon - a.lon)
+
+	var an = math.Sin(Δφ/2) * math.Sin(Δφ/2)
+	an += math.Cos(φ1) * math.Cos(φ2) * math.Sin(Δλ/2) * math.Sin(Δλ/2)
 
 	var c = 2 * math.Atan2(math.Sqrt(an), math.Sqrt(1-an))
 
 	var d = R * c
-	// Convert to meters and cast to int
-	return int(d / 1000)
+
+	return int(d)
 }
