@@ -29,8 +29,20 @@ type StationList map[string]Station
 
 var Stations StationList = make(map[string]Station)
 
-// Return map distance(meters) => Station
-func (s *StationList) Nearest() (st map[int]Station) {
+func (s *StationList) Nearest(location Cordinate) (dist int, stn Station) {
+	for _, st := range *s {
+		if st.Latitude == 0.0 || st.Longitude == 0.0 {
+			continue
+		}
+
+		d := distance(Cordinate{lon: st.Longitude, lat: st.Latitude}, location)
+
+		if dist == 0 || dist > d {
+			dist = d
+			stn = st
+		}
+	}
+
 	return
 }
 
