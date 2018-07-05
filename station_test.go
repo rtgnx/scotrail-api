@@ -1,9 +1,12 @@
 package main
 
-import "testing"
+import (
+	"strings"
+	"testing"
+)
 
 func TestSearch(t *testing.T) {
-	load_stations("./stations.json")
+	load_stations()
 
 	results := Stations.Search("Dalmuir", 10)
 

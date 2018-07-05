@@ -47,29 +47,22 @@ func (s *StationList) Search(name string, limit int) (l []Station) {
 	return
 }
 
-func load_stations(path string) {
+func load_stations() {
 
-	d, err := ioutil.ReadFile(path)
+	res, _ := http.Get(STATION_LIST_URL)
+	b, _ := ioutil.ReadAll(res.Body)
 
-	if err != nil {
-		log.Fatalln(err.Error())
+	defer res.Body.Close()
+	stations := gjson.Get(string(b), "stations").Map()
+
+	for _, v := range stations {
+		Stations[v.Get("crs").String()] = Station{
+			Name:      v.Get("name").String(),
+			Code:      v.Get("crs").String(),
+			Longitude: v.Get("lon").Float(),
+			Latitude:  v.Get("lat").Float(),
+		}
 	}
-
-	var stations []Station
-
-	err = json.Unmarshal(d, &stations)
-
-	if err != nil {
-		log.Fatalln(err.Error())
-	}
-
-	for _, s := range stations {
-		Stations[s.Code] = s
-	}
-}
-
-type Cordinate struct {
-	long, lat float64
 }
 
 // Conversion from degress to radians

@@ -60,7 +60,7 @@ func main() {
 	addr := ":" + os.Getenv("PORT")
 	e := echo.New()
 
-	load_stations("./stations.json")
+	load_stations()
 	load_routes("./routes.json")
 
 	e.GET("/", Hello)
