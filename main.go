@@ -63,6 +63,10 @@ func GetNearest(ctx echo.Context) error {
 	)
 }
 
+func GetStations(ctx echo.Context) error {
+	return ctx.JSON(http.StatusOK, Stations)
+}
+
 func Hello(ctx echo.Context) error {
 	d, _ := ioutil.ReadFile("./index.html")
 	return ctx.HTMLBlob(http.StatusOK, d)
@@ -79,6 +83,7 @@ func main() {
 	e.GET("/status", GetStatus)
 	e.GET("/live/:stn", GetLiveBoard)
 	e.GET("/service/:id", GetServiceDetails)
+	e.GET("/stations", GetStations)
 	e.GET("/station/:stn", GetStation)
 	e.GET("/search/:name", GetSearchStations)
 	e.GET("/nearest/:lat/:lon", GetNearest)
