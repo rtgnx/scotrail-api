@@ -59,8 +59,10 @@ func PostNearest(ctx echo.Context) error {
 		return ctx.String(http.StatusOK, err.Error())
 	}
 
-	_, st := Stations.Nearest(*pt)
-	return ctx.JSON(http.StatusOK, st)
+	dist, st := Stations.Nearest(*pt)
+	return ctx.JSON(
+		http.StatusOK, map[string]interface{}{"station": st, "distance": dist},
+	)
 }
 
 func Hello(ctx echo.Context) error {
