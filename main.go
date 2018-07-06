@@ -7,6 +7,7 @@ import (
 	"strconv"
 
 	"github.com/labstack/echo"
+	"github.com/labstack/echo/middleware"
 )
 
 func GetLiveBoard(ctx echo.Context) error {
@@ -75,6 +76,8 @@ func Hello(ctx echo.Context) error {
 func main() {
 	addr := ":" + os.Getenv("PORT")
 	e := echo.New()
+
+	e.Use(middleware.CORS())
 
 	load_stations()
 	load_routes("./routes.json")
