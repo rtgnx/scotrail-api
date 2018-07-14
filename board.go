@@ -5,7 +5,6 @@ import (
 	"log"
 	"net/http"
 	"reflect"
-	"strconv"
 	"strings"
 
 	"github.com/PuerkitoBio/goquery"
@@ -15,7 +14,7 @@ const BOARD_URL = `https://www.scotrail.co.uk/nre/live-boards/`
 
 type Entry struct {
 	ID          string `json:"id"`
-	Platform    int    `json:"platform"`
+	Platform    string `json:"platform"`
 	Destination string `json:"destination"`
 	Departs     string `json:"departs"`
 	Arrives     string `json:"arrives"`
@@ -77,7 +76,7 @@ func ParseBoard(r io.Reader) (b Board) {
 				label := s.AttrOr("data-label", "")
 				reflect.ValueOf(e).Elem().FieldByName(label).SetString(s.Text())
 			case "Platform":
-				e.Platform = platform(s.Text())
+				e.Platform = s.Text()
 			case "Arrives", "Departs":
 				t := s.Text()
 				label := s.AttrOr("data-label", "")
@@ -91,9 +90,4 @@ func ParseBoard(r io.Reader) (b Board) {
 		}
 	})
 	return
-}
-
-func platform(p string) int {
-	i, _ := strconv.ParseInt(p, 10, 32)
-	return int(i)
 }
