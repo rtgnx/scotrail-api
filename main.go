@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"os"
 	"strconv"
+	"strings"
 
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
@@ -15,8 +16,8 @@ func GetLiveBoard(ctx echo.Context) error {
 
 	b := getBoard(stn)
 
-	if len(b.Services) < 1 {
-		return ctx.String(http.StatusNotAcceptable, "Invalid station name")
+	if strings.Compare(b.Station.Code, stn) != 0 {
+		return ctx.String(http.StatusNotFound, "Invalid station code")
 	}
 
 	return ctx.JSON(http.StatusOK, b)
