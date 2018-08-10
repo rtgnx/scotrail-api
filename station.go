@@ -70,7 +70,7 @@ func (s *StationList) Search(name string, limit int) (l []Station) {
 	return
 }
 
-func load_stations() {
+func loadStations() {
 
 	res, _ := http.Get(STATION_LIST_URL)
 	b, _ := ioutil.ReadAll(res.Body)

@@ -10,8 +10,10 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
-const BOARD_URL = `https://www.scotrail.co.uk/nre/live-boards/`
+// BoardURL link to html version of live board
+const BoardURL = `https://www.scotrail.co.uk/nre/live-boards/`
 
+// Entry on live board
 type Entry struct {
 	ID          string `json:"id"`
 	Platform    string `json:"platform"`
@@ -23,12 +25,13 @@ type Entry struct {
 	Operator    string `json:"operator"`
 }
 
+// Board type
 type Board struct {
 	Station  Station `json:"station"`
 	Services []Entry `json:"services"`
 }
 
-func (b *Board) HasStation(id string) (bool, int) {
+func (b *Board) hasStation(id string) (bool, int) {
 	for i, v := range b.Services {
 		if strings.Compare(v.ID, id) == 0 {
 			return true, i
@@ -39,7 +42,7 @@ func (b *Board) HasStation(id string) (bool, int) {
 }
 
 func getBoard(station string) Board {
-	res, err := http.Get(BOARD_URL + station)
+	res, err := http.Get(BoardURL + station)
 	if err != nil {
 		log.Fatalln(err.Error())
 	}
@@ -50,22 +53,22 @@ func getBoard(station string) Board {
 
 	defer res.Body.Close()
 
-	b := ParseBoard(res.Body)
+	b := parseBoard(res.Body)
 	b.Station, _ = Stations[station]
 
 	return b
 }
 
-func ParseBoard(r io.Reader) (b Board) {
+func parseBoard(r io.Reader) (b Board) {
 	doc, _ := goquery.NewDocumentFromReader(r)
 
 	doc.Find("tr.service").Each(func(i int, s *goquery.Selection) {
-		var e *Entry = new(Entry)
+		var e = new(Entry)
 
 		id, ok := s.Attr("data-id")
 
 		if ok {
-			if ok, idx := b.HasStation(id); ok {
+			if ok, idx := b.hasStation(id); ok {
 				e = &(b.Services)[idx]
 			}
 		}

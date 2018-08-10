@@ -6,9 +6,10 @@ import (
 	"log"
 )
 
+// Routes map [name] Route
 var Routes map[string]Route
 
-func load_routes(path string) {
+func loadRoutes(path string) {
 	b, _ := ioutil.ReadFile(path)
 
 	err := json.Unmarshal(b, &Routes)

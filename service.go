@@ -9,8 +9,10 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
-const SERVICE_ENDPOINT = `https://www.scotrail.co.uk/nre/service-details/`
+// ServiceURL link to service details
+const ServiceURL = `https://www.scotrail.co.uk/nre/service-details/`
 
+// Stop - train stop
 type Stop struct {
 	Station    string
 	Status     string
@@ -18,10 +20,11 @@ type Stop struct {
 	Time       string
 }
 
+// Service type
 type Service []Stop
 
-func serviceDetails(service_id string) Service {
-	res, err := http.Get(SERVICE_ENDPOINT + service_id)
+func serviceDetails(serviceID string) Service {
+	res, err := http.Get(ServiceURL + serviceID)
 
 	if err != nil {
 		log.Fatalln(err.Error())

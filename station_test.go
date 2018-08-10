@@ -6,7 +6,7 @@ import (
 )
 
 func TestSearch(t *testing.T) {
-	load_stations()
+	loadStations()
 
 	results := Stations.Search("Dalmuir", 10)
 
@@ -22,7 +22,7 @@ func TestSearch(t *testing.T) {
 }
 
 func TestNearest(t *testing.T) {
-	load_stations()
+	loadStations()
 
 	var c = Coordinate{lat: 55.859618, lon: -4.257926}
 	d, st := Stations.Nearest(c)

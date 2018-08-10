@@ -14,8 +14,9 @@ import (
 	"github.com/tidwall/gjson"
 )
 
-const ROUTE_STATUS_URL = `https://www.scotrail.co.uk/ajax/interactive_map/status`
+const RouteStatusURL = `https://www.scotrail.co.uk/ajax/interactive_map/status`
 
+// ServiceStatus type
 type ServiceStatus struct {
 	ID          string    `json:"id"`
 	Time        time.Time `json:"time"`
@@ -25,11 +26,13 @@ type ServiceStatus struct {
 	Status      string    `json:"status"`
 }
 
+// Issue type
 type Issue struct {
 	Severity string          `json:"severity"`
 	Details  []ServiceStatus `json:"details"`
 }
 
+// Route type
 type Route struct {
 	RouteID  int      `json:"route_id"`
 	Region   string   `json:"region"`
@@ -40,8 +43,8 @@ type Route struct {
 	Issue    Issue    `json:"issue"`
 }
 
-func GetRouteStatuses() (routes []Route) {
-	r, err := http.Get(ROUTE_STATUS_URL)
+func getRouteStatuses() (routes []Route) {
+	r, err := http.Get(RouteStatusURL)
 
 	if err != nil {
 		return
