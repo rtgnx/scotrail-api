@@ -15,11 +15,13 @@ const (
 	STATION_LIST_URL = `https://www.scotrail.co.uk/cache/trainline_stations/trainline?_=1530115581789`
 )
 
+// Coordinate type (longitude, latitude)
 type Coordinate struct {
 	lon float64 `json:"longitude"`
 	lat float64 `json:"latitude"`
 }
 
+// Station type
 type Station struct {
 	Name      string  `json:"name"`
 	Code      string  `json:"code"`
@@ -27,10 +29,13 @@ type Station struct {
 	Latitude  float64 `json:"latitude"`
 }
 
+// StationList type
 type StationList map[string]Station
 
+// Stations map[short_code]Station
 var Stations StationList = make(map[string]Station)
 
+// Nearest returns nearest station and distance
 func (s *StationList) Nearest(location Coordinate) (dist int, stn Station) {
 	for _, st := range *s {
 		if st.Latitude == 0.0 || st.Longitude == 0.0 {
@@ -48,6 +53,7 @@ func (s *StationList) Nearest(location Coordinate) (dist int, stn Station) {
 	return
 }
 
+// Search station list
 func (s *StationList) Search(name string, limit int) (l []Station) {
 	name = strings.ToLower(name)
 	r := fmt.Sprintf(".*%s.*", name)
