@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"reflect"
 	"strings"
+	"time"
 
 	"github.com/PuerkitoBio/goquery"
 )
@@ -27,9 +28,14 @@ type Entry struct {
 
 // Board type
 type Board struct {
-	Station  Station `json:"station"`
-	Services []Entry `json:"services"`
+	Station   Station `json:"station"`
+	Services  []Entry `json:"services"`
+	timestamp time.Time
 }
+
+// Boards map of recently fetched boards
+// used for caching requests
+var Boards map[string]Board
 
 func (b *Board) hasStation(id string) (bool, int) {
 	for i, v := range b.Services {
@@ -42,6 +48,13 @@ func (b *Board) hasStation(id string) (bool, int) {
 }
 
 func getBoard(station string) Board {
+
+	b, ok := Boards[station]
+
+	if ok && time.Now().Before(b.timestamp.Add(time.Second*30)) {
+		return b
+	}
+
 	res, err := http.Get(BoardURL + station)
 	if err != nil {
 		log.Fatalln(err.Error())
@@ -53,9 +66,10 @@ func getBoard(station string) Board {
 
 	defer res.Body.Close()
 
-	b := parseBoard(res.Body)
+	b = parseBoard(res.Body)
 	b.Station, _ = Stations[station]
 
+	Boards[station] = b
 	return b
 }
 
@@ -92,5 +106,7 @@ func parseBoard(r io.Reader) (b Board) {
 			b.Services = append(b.Services, *e)
 		}
 	})
+
+	b.timestamp = time.Now()
 	return
 }
