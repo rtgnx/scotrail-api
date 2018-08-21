@@ -36,7 +36,7 @@ type Board struct {
 
 // Boards map of recently fetched boards
 // used for caching requests
-var Boards map[string]Board
+var Boards = make(map[string]Board)
 
 func (b *Board) hasStation(id string) (bool, int) {
 	for i, v := range b.Services {
