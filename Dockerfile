@@ -6,7 +6,10 @@ WORKDIR /go/src/app
 COPY . .
 
 RUN go get -d -v ./...
-RUN go install -v ./...
+RUN go build -ldflags \
+  "-X main.CommitID=$(git rev-parse HEAD) \
+  -X main.Branch=$(git branch | grep \* | cut -d ' ' -f2)" \
+  -o /go/bin/app
 
 ENV PORT 8981
 
