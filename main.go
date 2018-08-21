@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"os"
@@ -10,6 +11,22 @@ import (
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 )
+
+var (
+	// Version number
+	Version = "1.0"
+
+	// CommitID of this build, set during build
+	CommitID string
+
+	// Branch is set during build
+	Branch string
+)
+
+func getVersion(ctx echo.Context) error {
+	return ctx.String(http.StatusOK,
+		fmt.Sprintf("%s - %s @ %s", Version, CommitID, Branch))
+}
 
 func getLiveBoard(ctx echo.Context) error {
 	stn := ctx.Param("stn")
@@ -84,6 +101,7 @@ func main() {
 	loadRoutes("./routes.json")
 
 	e.GET("/", index)
+	e.GET("/version", getVersion)
 	e.GET("/status", getStatus)
 	e.GET("/live/:stn", getLiveBoard)
 	e.GET("/service/:id", getServiceDetails)
