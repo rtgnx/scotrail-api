@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"io"
 	"log"
 	"net/http"
@@ -11,7 +12,7 @@ import (
 )
 
 // BoardURL link to html version of live board
-const BoardURL = `https://www.scotrail.co.uk/nre/live-boards/`
+const BoardURL = `https://www.scotrail.co.uk/nre/live-boards/%s/lazy`
 
 // Entry on live board
 type Entry struct {
@@ -42,7 +43,8 @@ func (b *Board) hasStation(id string) (bool, int) {
 }
 
 func getBoard(station string) Board {
-	res, err := http.Get(BoardURL + station)
+	res, err := http.Get(fmt.Sprintf(BoardURL, station))
+
 	if err != nil {
 		log.Fatalln(err.Error())
 	}
