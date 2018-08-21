@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"io"
 	"log"
 	"net/http"
@@ -10,7 +11,7 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
-const BOARD_URL = `https://www.scotrail.co.uk/nre/live-boards/`
+const BOARD_URL = `https://www.scotrail.co.uk/nre/live-boards/%s/lazy`
 
 type Entry struct {
 	ID          string `json:"id"`
@@ -39,7 +40,7 @@ func (b *Board) HasStation(id string) (bool, int) {
 }
 
 func getBoard(station string) Board {
-	res, err := http.Get(BOARD_URL + station)
+	res, err := http.Get(fmt.Sprintf(BOARD_URL, station))
 	if err != nil {
 		log.Fatalln(err.Error())
 	}
