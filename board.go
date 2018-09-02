@@ -77,6 +77,8 @@ func getBoard(station string) Board {
 func parseBoard(r io.Reader) (b Board) {
 	doc, _ := goquery.NewDocumentFromReader(r)
 
+	b.Services = make([]Entry, 0)
+
 	doc.Find("tr.service").Each(func(i int, s *goquery.Selection) {
 		var e = new(Entry)
 
